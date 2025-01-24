@@ -52,7 +52,13 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <h1 className="text-4xl font-bold mb-8 text-primary">DateDash</h1>
+      <div className="text-center space-y-2 mb-8">
+        <h1 className="text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+          DateDash
+        </h1>
+        <p className="text-lg text-foreground">Quick and easy date ideas on the go.</p>
+      </div>
+      
       <CityInput 
         onSubmit={handleCitySubmit}
         error={error}
@@ -66,7 +72,7 @@ export default function Home() {
       )}
 
       {dateIdeas.length > 0 && (
-        <div className="mt-8 w-full max-w-4xl px-12">
+        <div className="mt-8 w-full max-w-md px-12">
           <Carousel>
             <CarouselContent>
               {dateIdeas.map((idea, index) => (
