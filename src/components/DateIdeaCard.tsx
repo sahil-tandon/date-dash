@@ -5,24 +5,22 @@ import { Button } from '@/components/ui/button';
 
 export function DateIdeaCard({ idea, onLove, onShare }: DateIdeaCardProps) {
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full">
       <CardHeader>
-        <div className="flex items-start justify-between">
-          <CardTitle className="text-xl">
-            <span className="mr-2 text-2xl">{idea.icon}</span>
-            {idea.title}
-          </CardTitle>
-        </div>
+        <CardTitle className="text-center text-xl text-primary">{idea.title}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <CardDescription className="text-base">
+      <CardContent className="space-y-6 text-center">
+        <span className="block text-4xl" aria-hidden="true">
+          {idea.icon}
+        </span>
+        <CardDescription className="text-base text-foreground">
           {idea.description}
         </CardDescription>
-        <p className="mt-4 text-sm font-medium text-primary">
+        <p className="text-sm font-medium text-primary">
           Estimated Cost: {idea.estimatedCost}
         </p>
       </CardContent>
-      <CardFooter className="justify-end gap-2">
+      <CardFooter className="justify-center gap-2">
         <Button
           variant="outline"
           size="icon"
