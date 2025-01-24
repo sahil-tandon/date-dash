@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
-import { kv } from '@vercel/kv';
+import { Redis } from '@upstash/redis';
 import { DateIdea } from '@/types';
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
 
 const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
 
@@ -17,12 +22,11 @@ export async function POST(req: Request) {
 
     const cacheKey = `date-ideas:${city.toLowerCase()}`;
     
-    const cachedIdeas = await kv.get<DateIdea[]>(cacheKey);
+    const cachedIdeas = await redis.get<DateIdea[]>(cacheKey);
     if (cachedIdeas) {
       return NextResponse.json({ success: true, data: cachedIdeas });
     }
 
-    // TODO: Replace with actual OpenAI API call later
     const mockIdeas: DateIdea[] = [
       {
         title: "Sunset Picnic at Central Park",
@@ -56,7 +60,7 @@ export async function POST(req: Request) {
       }
     ];
 
-    await kv.set(cacheKey, mockIdeas, { ex: ONE_YEAR_IN_SECONDS });
+    await redis.setex(cacheKey, ONE_YEAR_IN_SECONDS, mockIdeas);
 
     return NextResponse.json({ success: true, data: mockIdeas });
     
