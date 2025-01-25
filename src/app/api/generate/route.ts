@@ -50,19 +50,63 @@ export async function POST(req: Request) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     
-    const result = await model.generateContent(PROMPT.replace('{city}', city));
-    const response = result.response.text();
-    
-    const parsedResponse = JSON.parse(response);
-    const dateIdeas: DateIdea[] = parsedResponse.ideas;
+    try {
+      const result = await model.generateContent(PROMPT.replace('{city}', city));
+      const response = result.response.text();
+      
+      // Add validation for the response
+      if (!response) {
+        throw new Error('Empty response from Gemini API');
+      }
 
-    await redis.setex(cacheKey, ONE_YEAR_IN_SECONDS, dateIdeas);
+      let parsedResponse;
+      try {
+        parsedResponse = JSON.parse(response);
+      } catch (parseError) {
+        console.error('JSON Parse Error:', response);
+        throw new Error('Invalid JSON response from AI');
+      }
 
-    return NextResponse.json({ success: true, data: dateIdeas });
+      if (!parsedResponse.ideas || !Array.isArray(parsedResponse.ideas)) {
+        throw new Error('Invalid response structure from AI');
+      }
+
+      const dateIdeas: DateIdea[] = parsedResponse.ideas;
+
+      // Validate the structure of each date idea
+      const isValidIdea = (idea: any): idea is DateIdea => {
+        return (
+          typeof idea.title === 'string' &&
+          typeof idea.description === 'string' &&
+          typeof idea.estimatedCost === 'string' &&
+          typeof idea.icon === 'string'
+        );
+      };
+
+      if (!dateIdeas.every(isValidIdea)) {
+        throw new Error('Invalid date idea structure in response');
+      }
+
+      await redis.setex(cacheKey, ONE_YEAR_IN_SECONDS, dateIdeas);
+
+      return NextResponse.json({ success: true, data: dateIdeas });
+    } catch (aiError) {
+      console.error('AI Generation Error:', aiError);
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Failed to generate date ideas. Please try again.' 
+        },
+        { status: 500 }
+      );
+    }
   } catch (error) {
-    console.error('Error generating date ideas:', error);
+    console.error('General Error:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to generate date ideas' },
+      { 
+        success: false, 
+        error: 'An unexpected error occurred. Please try again.' 
+      },
       { status: 500 }
     );
   }
