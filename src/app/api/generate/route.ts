@@ -12,7 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 
 const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
 
-const PROMPT = `Generate 5 unique and creative date ideas for {city}. Each idea should be suitable for the local area, considering culture, weather, and available attractions. Format the response as a JSON array of objects with these exact properties:
+const PROMPT = `Generate 10 unique and creative date ideas for {city}. Each idea should be suitable for the local area, considering culture, weather, and available attractions. Format the response as a JSON array of objects with these exact properties:
 - title: A catchy, brief title (max 50 chars)
 - description: A clear, engaging description (max 500 chars)
 - estimatedCost: Cost range in USD (e.g., "$30-50")
