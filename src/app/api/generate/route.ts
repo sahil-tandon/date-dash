@@ -12,7 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 
 const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
 
-const PROMPT = `Generate 5 unique and creative date ideas for {city}. Format as JSON array with properties: title (max 50 chars), description (max 150 chars), estimatedCost (e.g. "$30-50"), icon (single emoji). Return only valid JSON like: {"ideas":[{"title":"Sample Date","description":"Sample description","estimatedCost":"$30-50","icon":"🎸"}]}`;
+const PROMPT = `Generate 10 unique and creative date ideas for {city}. Format as JSON array with properties: title (max 50 chars), description (max 150 chars), estimatedCost (e.g. "$30-50"), icon (single emoji). Return only valid JSON like: {"ideas":[{"title":"Sample Date","description":"Sample description","estimatedCost":"$30-50","icon":"🎸"}]}`;
 
 export async function POST(req: Request) {
   try {
