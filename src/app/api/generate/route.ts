@@ -12,23 +12,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 
 const ONE_YEAR_IN_SECONDS = 365 * 24 * 60 * 60;
 
-const PROMPT = `Generate 10 unique and creative date ideas for {city}. Each idea should be suitable for the local area, considering culture, weather, and available attractions. Format the response as a JSON array of objects with these exact properties:
-- title: A catchy, brief title (max 50 chars)
-- description: A clear, engaging description (max 500 chars)
-- estimatedCost: Cost range in USD (e.g., "$30-50")
-- icon: A single emoji representing the activity
-
-Return only valid JSON without any additional text. Format example:
-{
-  "ideas": [
-    {
-      "title": "Adventure at Whitewater Center",
-      "description": "Experience outdoor fun at the U.S. National Whitewater Center. Go kayaking, zip-lining, or enjoy live music and craft beers by the river.",
-      "estimatedCost": "$30-60",
-      "icon": "🚣"
-    },
-  ]
-}`;
+const PROMPT = `Generate 5 unique and creative date ideas for {city}. Format as JSON array with properties: title (max 50 chars), description (max 150 chars), estimatedCost (e.g. "$30-50"), icon (single emoji). Return only valid JSON like: {"ideas":[{"title":"Sample Date","description":"Sample description","estimatedCost":"$30-50","icon":"🎸"}]}`;
 
 export async function POST(req: Request) {
   try {
