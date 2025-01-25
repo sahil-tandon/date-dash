@@ -54,7 +54,6 @@ export async function POST(req: Request) {
       const result = await model.generateContent(PROMPT.replace('{city}', city));
       const response = result.response.text();
       
-      // Add validation for the response
       if (!response) {
         throw new Error('Empty response from Gemini API');
       }
@@ -63,7 +62,7 @@ export async function POST(req: Request) {
       try {
         parsedResponse = JSON.parse(response);
       } catch (parseError) {
-        console.error('JSON Parse Error:', response);
+        console.error('JSON Parse Error:', { error: parseError, response });
         throw new Error('Invalid JSON response from AI');
       }
 
@@ -73,8 +72,7 @@ export async function POST(req: Request) {
 
       const dateIdeas: DateIdea[] = parsedResponse.ideas;
 
-      // Validate the structure of each date idea
-      const isValidIdea = (idea: any): idea is DateIdea => {
+      const isValidIdea = (idea: DateIdea): idea is DateIdea => {
         return (
           typeof idea.title === 'string' &&
           typeof idea.description === 'string' &&
