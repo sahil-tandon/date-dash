@@ -10,7 +10,7 @@ export function DateIdeaCard({ idea, onLove, onShare }: DateIdeaCardProps) {
         <CardTitle className="text-center text-xl text-primary">{idea.title}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6 text-center">
-        <span className="block text-4xl" aria-hidden="true">
+        <span className="block text-7xl" aria-hidden="true">
           {idea.icon}
         </span>
         <CardDescription className="text-base text-foreground">
