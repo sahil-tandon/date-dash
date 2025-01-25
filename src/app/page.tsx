@@ -71,7 +71,7 @@ export default function Home() {
         </div>
       )}
 
-      {dateIdeas.length > 0 && (
+      {!isLoading && dateIdeas.length > 0 && (
         <div className="mt-8 w-full max-w-md px-12">
           <Carousel>
             <CarouselContent>
