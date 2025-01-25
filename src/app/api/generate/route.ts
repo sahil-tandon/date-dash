@@ -4,8 +4,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { DateIdea } from '@/types';
 
 const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  url: `${process.env.UPSTASH_REDIS_REST_URL}`,
+  token: `${process.env.UPSTASH_REDIS_REST_TOKEN}`,
 });
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
