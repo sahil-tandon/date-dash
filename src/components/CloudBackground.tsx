@@ -12,7 +12,7 @@ export const CloudBackground = () => {
         shadowOpacity={0.15}
         layers={[
           {
-            size: 140,
+            size: 90,
             color: '#ffb3c1',
             bottomOffset: 120,
             randomization: {
@@ -24,9 +24,9 @@ export const CloudBackground = () => {
             },
           },
           {
-            size: 120,
+            size: 100,
             color: '#ffccd5',
-            bottomOffset: 60,
+            bottomOffset: 70,
             randomization: {
               xMin: 0.4,
               xMax: 0.8,
@@ -36,9 +36,9 @@ export const CloudBackground = () => {
             },
           },
           {
-            size: 100,
+            size: 120,
             color: '#fff0f3',
-            bottomOffset: 0,
+            bottomOffset: 10,
             randomization: {
               xMin: 0.4,
               xMax: 0.8,
