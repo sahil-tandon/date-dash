@@ -55,7 +55,22 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		keyframes: {
+			floatUpInfinite: {
+			'0%': { transform: 'translateY(0)' },
+			'100%': { transform: 'translateY(-120dvh)' }
+			},
+			heartbeat: {
+			'0%, 100%': { transform: 'rotateY(0)' },
+			'50%': { transform: 'rotateY(-45deg)' }
+			}
+		},
+		animation: {
+			'float-up-slow': 'floatUpInfinite 13s linear infinite',
+			'float-up-medium': 'floatUpInfinite 9s linear infinite',
+			'heartbeat': 'heartbeat 1s ease infinite'
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
