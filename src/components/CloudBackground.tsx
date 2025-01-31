@@ -100,7 +100,7 @@ export const CloudBackground = () => {
         layers={[
           {
             size: 120,
-            color: '#fff0f3',
+            color: '#ffffff',
             bottomOffset: 10,
             randomization: {
               xMin: 0.4,
