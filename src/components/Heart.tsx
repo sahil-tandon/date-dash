@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-type HeartProps = {
+export type HeartProps = {
   className?: string;
   style?: React.CSSProperties;
 };
 
-const Heart = ({ className = '', style = {} }: HeartProps) => {
+export const Heart = ({ className = '', style = {} }: HeartProps) => {
   return (
     <div className={`absolute ${className}`} style={style}>
       <div className="relative">
@@ -56,68 +56,3 @@ const Heart = ({ className = '', style = {} }: HeartProps) => {
     </div>
   );
 };
-
-export const FloatingHearts = () => {
-  return (
-    <div className="absolute z-10 inset-0 pointer-events-none">
-      {/* First heart */}
-      <Heart 
-        className="animate-float-up-medium"
-        style={{ 
-          left: '15dvw', 
-          bottom: '0',
-          animationDelay: '3.5s'
-        }}
-      />
-      
-      {/* Second heart */}
-      <Heart 
-        className="animate-float-up-slow"
-        style={{ 
-          left: '30dvw', 
-          bottom: '0',
-          animationDelay: '4.5s'
-        }}
-      />
-
-      {/* Second heart */}
-      <Heart 
-        className="animate-float-up-slow"
-        style={{ 
-          left: '45dvw', 
-          bottom: '0',
-          animationDelay: '2s'
-        }}
-      />
-
-      <Heart 
-        className="animate-float-up-medium"
-        style={{ 
-          left: '60dvw', 
-          bottom: '0',
-          animationDelay: '6s'
-        }}
-      />
-
-      <Heart 
-        className="animate-float-up-medium"
-        style={{ 
-          left: '75dvw', 
-          bottom: '0',
-          animationDelay: '9s'
-        }}
-      />
-
-      <Heart 
-        className="animate-float-up-slow"
-        style={{ 
-          left: '90dvw', 
-          bottom: '0',
-          animationDelay: '4s'
-        }}
-      />
-    </div>
-  );
-};
-
-export default FloatingHearts;
