@@ -67,8 +67,12 @@ export default {
 			}
 		},
 		animation: {
-			'float-up-slow': 'floatUpInfinite 13s linear infinite',
-			'float-up-medium': 'floatUpInfinite 9s linear infinite',
+			'float-up-slowest': 'floatUpInfinite 14s linear infinite',
+			'float-up-slower': 'floatUpInfinite 13s linear infinite',
+			'float-up-slow': 'floatUpInfinite 12s linear infinite',
+			'float-up-fast': 'floatUpInfinite 11s linear infinite',
+			'float-up-faster': 'floatUpInfinite 10s linear infinite',
+			'float-up-fastest': 'floatUpInfinite 9s linear infinite',
 			'heartbeat': 'heartbeat 1s ease infinite'
 		}
   	}
