@@ -11,33 +11,30 @@ export const CloudBackground = () => {
       <div className="absolute inset-0 z-30 pointer-events-none">
         <Heart 
           className="animate-float-up-slow"
-          style={{ left: '15dvw', bottom: '0', animationDelay: '3s' }}
+          style={{ left: '10dvw', bottom: '0', animationDelay: '3s' }}
         />
         <Heart 
           className="animate-float-up-fastest"
-          style={{ left: '75dvw', bottom: '0', animationDelay: '7s' }}
+          style={{ left: '58dvw', bottom: '0', animationDelay: '14s' }}
+        />
+        <Heart 
+          className="animate-float-up-slower"
+          style={{ left: '90dvw', bottom: '0', animationDelay: '10s' }}
         />
       </div>
 
       <div className="absolute inset-0 z-20 pointer-events-none">
         <Heart 
           className="animate-float-up-fast"
-          style={{ left: '30dvw', bottom: '0', animationDelay: '14s' }}
+          style={{ left: '26dvw', bottom: '0', animationDelay: '12s' }}
+        />
+        <Heart 
+          className="animate-float-up-faster"
+          style={{ left: '42dvw', bottom: '0', animationDelay: '7s' }}
         />
         <Heart 
           className="animate-float-up-slowest"
-          style={{ left: '60dvw', bottom: '0', animationDelay: '5s' }}
-        />
-      </div>
-
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        <Heart 
-          className="animate-float-up-faster"
-          style={{ left: '45dvw', bottom: '0', animationDelay: '4s' }}
-        />
-        <Heart 
-          className="animate-float-up-slower"
-          style={{ left: '90dvw', bottom: '0', animationDelay: '12s' }}
+          style={{ left: '74dvw', bottom: '0', animationDelay: '4s' }}
         />
       </div>
 
