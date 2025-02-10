@@ -59,11 +59,11 @@ export default function Home() {
       <div className={`flex-1 flex flex-col items-center justify-center ${topPaddingClass}`}>
         <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">          
           <div className="text-center space-y-2 mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              DateDash
+            <h1 className="text-4xl md:text-5xl font-normal tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-barrio">
+              Date Dash
             </h1>
-            <p className="text-base md:text-lg text-foreground">
-              Quick and easy date ideas on the go.
+            <p className="text-xl md:text-2xl text-foreground font-oooh-baby">
+              Quick and easy date ideas on the go...
             </p>
           </div>
           
