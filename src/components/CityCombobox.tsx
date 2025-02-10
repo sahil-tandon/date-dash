@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown, Loader2 } from "lucide-react";
+import { ChevronsUpDown, Loader2 } from "lucide-react";
 
 interface City {
   id: number;
@@ -67,7 +67,7 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between text-lg"
+            className="w-full justify-between text-lg bg-white border-secondary/30 rounded-xl h-12 px-4 font-pompiere text-primary/90"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -77,32 +77,34 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
             ) : (
               "Select a city..."
             )}
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-40" />
           </Button>
         </PopoverTrigger>
         <PopoverContent 
-          className="w-[--radix-popover-trigger-width] p-0" 
+          className="w-[--radix-popover-trigger-width] p-0 overflow-hidden" 
           align="start"
           sideOffset={4}
         >
-          <Command className="w-full">
+          <Command className="w-full rounded-xl border-none">
             <CommandInput
               placeholder="Type a city name..."
               value={search}
               onValueChange={setSearch}
-              className="h-9 text-lg"
+              className="h-11 text-lg font-pompiere border-none focus:ring-0 focus-visible:ring-0 text-primary/90"
             />
-            <div className="max-h-[300px] overflow-y-auto">
+            <div className="max-h-[300px] overflow-y-auto pt-1 custom-scrollbar">
               {searching && (
                 <div className="py-6 text-center text-lg">
                   <Loader2 className="h-4 w-4 animate-spin mx-auto" />
                 </div>
               )}
               {!searching && cities.length === 0 && search.length >= 2 && (
-                <CommandEmpty className="text-lg">No cities found.</CommandEmpty>
+                <CommandEmpty className="text-lg font-pompiere text-primary/90 py-2">
+                  <div className="px-4">No cities found.</div>
+                </CommandEmpty>
               )}
               {!searching && cities.length > 0 && (
-                <CommandGroup>
+                <CommandGroup className="p-0">
                   {cities.map((city) => (
                     <CommandItem
                       key={city.id}
@@ -113,15 +115,9 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
                         onSelect(city.value);
                         setSearch("");
                       }}
-                      className="cursor-pointer text-lg"
+                      className="cursor-pointer text-lg font-pompiere py-2 text-primary/90 aria-selected:bg-secondary/10"
                     >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          value === city.value ? "opacity-100" : "opacity-0"
-                        )}
-                      />
-                      {city.value}
+                      <div className="px-2">{city.value}</div>
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -130,7 +126,7 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
           </Command>
         </PopoverContent>
       </Popover>
-      {error && <p className="text-lg text-destructive mt-2">{error}</p>}
+      {error && <p className="text-lg text-destructive/80 mt-2 font-pompiere">{error}</p>}
     </div>
   );
 }
