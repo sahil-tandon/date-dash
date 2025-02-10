@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Barrio, Oooh_Baby } from "next/font/google";
+import { Geist, Geist_Mono, Barrio, Oooh_Baby, Pompiere } from "next/font/google";
 import "./globals.css";
 import { CloudBackground } from "@/components/CloudBackground";
 
@@ -25,6 +25,12 @@ const ooohBaby = Oooh_Baby({
   subsets: ["latin"],
 });
 
+const pompiere = Pompiere({
+  weight: "400",
+  variable: "--font-pompiere",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "DateDash - Find Your Perfect Date Idea",
   description: "Generate personalized date ideas based on your location",
@@ -38,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${barrio.variable} ${ooohBaby.variable} antialiased bg-rose-100`}
+        className={`${geistSans.variable} ${geistMono.variable} ${barrio.variable} ${ooohBaby.variable} ${pompiere.variable} font-pompiere antialiased bg-rose-100`}
       >
         <CloudBackground />
         <main className="relative min-h-screen">

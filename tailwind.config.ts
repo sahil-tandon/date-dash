@@ -8,10 +8,11 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
+    extend: {
       fontFamily: {
         barrio: ['var(--font-barrio)'],
         'oooh-baby': ['var(--font-oooh-baby)'],
+        pompiere: ['var(--font-pompiere)'],
       },
       colors: {
         background: 'hsl(var(--background))',
@@ -62,12 +63,12 @@ export default {
       },
       keyframes: {
         floatUpInfinite: {
-        '0%': { transform: 'translateY(0)' },
-        '100%': { transform: 'translateY(-120dvh)' }
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-120dvh)' }
         },
         heartbeat: {
-        '0%, 100%': { transform: 'rotateY(0)' },
-        '50%': { transform: 'rotateY(-45deg)' }
+          '0%, 100%': { transform: 'rotateY(0)' },
+          '50%': { transform: 'rotateY(-45deg)' }
         }
       },
       animation: {
@@ -78,8 +79,8 @@ export default {
         'float-up-faster': 'floatUpInfinite 10s linear infinite',
         'float-up-fastest': 'floatUpInfinite 9s linear infinite',
         'heartbeat': 'heartbeat 1s ease infinite'
-      },
-  	}
+      }
+    }
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
