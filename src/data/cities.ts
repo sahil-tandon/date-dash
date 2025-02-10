@@ -43144,7 +43144,7 @@ export const CITIES: string[] = [
     "Washington Court House, United States",
     "Washington Terrace, United States",
     "Washington, United Kingdom",
-    "Washington, United States",
+    "Washington, D.C., United States",
     "Washougal, United States",
     "Wasi, India",
     "Wasilków, Poland",
