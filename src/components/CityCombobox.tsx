@@ -60,14 +60,14 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
   }, [search]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full font-pompiere text-lg">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between"
+            className="w-full justify-between text-lg"
             disabled={isLoading}
           >
             {isLoading ? (
@@ -90,16 +90,16 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
               placeholder="Type a city name..."
               value={search}
               onValueChange={setSearch}
-              className="h-9"
+              className="h-9 text-lg"
             />
             <div className="max-h-[300px] overflow-y-auto">
               {searching && (
-                <div className="py-6 text-center text-sm">
+                <div className="py-6 text-center text-lg">
                   <Loader2 className="h-4 w-4 animate-spin mx-auto" />
                 </div>
               )}
               {!searching && cities.length === 0 && search.length >= 2 && (
-                <CommandEmpty>No cities found.</CommandEmpty>
+                <CommandEmpty className="text-lg">No cities found.</CommandEmpty>
               )}
               {!searching && cities.length > 0 && (
                 <CommandGroup>
@@ -113,7 +113,7 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
                         onSelect(city.value);
                         setSearch("");
                       }}
-                      className="cursor-pointer"
+                      className="cursor-pointer text-lg"
                     >
                       <Check
                         className={cn(
@@ -130,7 +130,7 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
           </Command>
         </PopoverContent>
       </Popover>
-      {error && <p className="text-sm text-destructive mt-2">{error}</p>}
+      {error && <p className="text-lg text-destructive mt-2">{error}</p>}
     </div>
   );
 }

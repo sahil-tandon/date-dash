@@ -7,16 +7,18 @@ export function DateIdeaCard({ idea, onLove, onShare }: DateIdeaCardProps) {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-center text-xl text-primary">{idea.title}</CardTitle>
+        <CardTitle className="text-center text-2xl text-primary font-pompiere tracking-wide">
+          {idea.title}
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-6 text-center">
         <span className="block text-7xl" aria-hidden="true">
           {idea.icon}
         </span>
-        <CardDescription className="text-base text-foreground">
+        <CardDescription className="text-lg text-foreground font-pompiere">
           {idea.description}
         </CardDescription>
-        <p className="text-sm font-medium text-primary">
+        <p className="text-lg font-pompiere text-primary tracking-wide">
           Estimated Cost: {idea.estimatedCost}
         </p>
       </CardContent>
