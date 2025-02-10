@@ -47,7 +47,6 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
         );
         if (!response.ok) throw new Error("Failed to fetch cities");
         const data = await response.json();
-        console.log('API Response:', data); // Debug log
         setCities(data.cities || []);
       } catch (error) {
         console.error("Failed to search cities:", error);
