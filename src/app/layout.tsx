@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Barrio, Oooh_Baby, Pompiere } from "next/font/google";
 import "./globals.css";
 import { CloudBackground } from "@/components/CloudBackground";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const barrio = Barrio({
+  weight: "400",
+  variable: "--font-barrio",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ooohBaby = Oooh_Baby({
+  weight: "400",
+  variable: "--font-oooh-baby",
+  subsets: ["latin"],
+});
+
+const pompiere = Pompiere({
+  weight: "400",
+  variable: "--font-pompiere",
   subsets: ["latin"],
 });
 
@@ -26,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-rose-100`}
+        className={`${barrio.variable} ${ooohBaby.variable} ${pompiere.variable} font-pompiere antialiased bg-rose-100`}
       >
         <CloudBackground />
         <main className="relative min-h-screen">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CityInput } from '@/components/CityInput';
+import { CityCombobox } from '@/components/CityCombobox';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { DateIdea } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -18,7 +18,7 @@ export default function Home() {
   const [error, setError] = useState<string | undefined>();
   const [dateIdeas, setDateIdeas] = useState<DateIdea[]>([]);
 
-  const handleCitySubmit = async (city: string) => {
+  const handleCitySelect = async (city: string) => {
     setIsLoading(true);
     setError(undefined);
     
@@ -58,18 +58,18 @@ export default function Home() {
     <div className="min-h-screen flex flex-col">
       <div className={`flex-1 flex flex-col items-center justify-center ${topPaddingClass}`}>
         <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">          
-          <div className="text-center space-y-2 mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-              DateDash
+          <div className="text-center space-y-4 mb-12">
+            <h1 className="text-5xl md:text-6xl font-normal tracking-wide text-primary font-barrio">
+              DATE DASH
             </h1>
-            <p className="text-base md:text-lg text-foreground">
-              Quick and easy date ideas on the go.
+            <p className="text-2xl md:text-3xl text-primary/90 font-oooh-baby">
+              Quick and easy date ideas on the go...
             </p>
           </div>
           
           <div className="w-full max-w-md px-4">
-            <CityInput 
-              onSubmit={handleCitySubmit}
+            <CityCombobox 
+              onSelect={handleCitySelect}
               error={error}
               isLoading={isLoading}
             />
@@ -77,7 +77,7 @@ export default function Home() {
 
           {isLoading && (
             <div className="mt-8 w-full max-w-md px-4">
-              <Skeleton className="h-64 w-full rounded-lg" />
+              <Skeleton className="h-64 w-full rounded-2xl" />
             </div>
           )}
 
@@ -95,8 +95,8 @@ export default function Home() {
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="h-8 w-8 -left-10" />
+                <CarouselNext className="h-8 w-8 -right-10" />
               </Carousel>
             </div>
           )}
