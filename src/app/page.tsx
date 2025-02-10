@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CityInput } from '@/components/CityInput';
+import { CityCombobox } from '@/components/CityCombobox';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { DateIdea } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -18,7 +18,7 @@ export default function Home() {
   const [error, setError] = useState<string | undefined>();
   const [dateIdeas, setDateIdeas] = useState<DateIdea[]>([]);
 
-  const handleCitySubmit = async (city: string) => {
+  const handleCitySelect = async (city: string) => {
     setIsLoading(true);
     setError(undefined);
     
@@ -68,8 +68,8 @@ export default function Home() {
           </div>
           
           <div className="w-full max-w-md px-4">
-            <CityInput 
-              onSubmit={handleCitySubmit}
+            <CityCombobox 
+              onSelect={handleCitySelect}
               error={error}
               isLoading={isLoading}
             />
