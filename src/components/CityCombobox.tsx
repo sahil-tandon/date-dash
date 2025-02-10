@@ -60,7 +60,7 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
   }, [search]);
 
   return (
-    <div className="w-full">
+    <div className="relative w-full">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -80,12 +80,17 @@ export function CityCombobox({ onSelect, error, isLoading }: CityComboboxProps) 
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-full p-0" align="start">
+        <PopoverContent 
+          className="w-[--radix-popover-trigger-width] p-0" 
+          align="start"
+          sideOffset={4}
+        >
           <Command className="w-full">
             <CommandInput
               placeholder="Type a city name..."
               value={search}
               onValueChange={setSearch}
+              className="h-9"
             />
             <div className="max-h-[300px] overflow-y-auto">
               {searching && (
