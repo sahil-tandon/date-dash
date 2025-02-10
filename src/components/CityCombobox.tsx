@@ -12,7 +12,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import { ChevronsUpDown, Loader2 } from "lucide-react";
 
 interface City {
