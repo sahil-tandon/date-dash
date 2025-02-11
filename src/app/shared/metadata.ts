@@ -1,12 +1,11 @@
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata(
-  { searchParams }: Props,
-  parent: ResolvingMetadata
+  { searchParams }: Props
 ): Promise<Metadata> {
   const title = searchParams.title as string || 'Date Idea';
   const description = searchParams.description as string || '';
