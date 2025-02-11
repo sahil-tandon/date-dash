@@ -62,7 +62,7 @@ export default function Home() {
         <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">          
           <div className="text-center space-y-4 mb-12">
             <h1 className="text-5xl md:text-6xl font-normal tracking-wide text-primary font-barrio">
-              DATE DASH
+              DaTe DAsh
             </h1>
             <p className="text-2xl md:text-3xl text-primary/90 font-oooh-baby">
               Quick and easy date ideas on the go...
