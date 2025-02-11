@@ -1,14 +1,16 @@
 "use client";
 
+import { Suspense } from 'react';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
 import { DateIdea } from '@/types';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { Skeleton } from '@/components/ui/skeleton';
 
-export default function SharedDateIdea() {
+function SharedDateContent() {
   const searchParams = useSearchParams();
   const [sharedIdea, setSharedIdea] = useState<DateIdea | null>(null);
   const [city, setCity] = useState<string>('');
@@ -69,5 +71,27 @@ export default function SharedDateIdea() {
         </div>
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-8">
+        <div className="text-center space-y-4">
+          <Skeleton className="h-12 w-3/4 mx-auto" />
+          <Skeleton className="h-8 w-2/3 mx-auto" />
+        </div>
+        <Skeleton className="h-96 w-full rounded-2xl" />
+      </div>
+    </div>
+  );
+}
+
+export default function SharedDateIdea() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <SharedDateContent />
+    </Suspense>
   );
 }
