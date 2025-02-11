@@ -17,10 +17,12 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const [dateIdeas, setDateIdeas] = useState<DateIdea[]>([]);
+  const [selectedCity, setSelectedCity] = useState<string>('');
 
   const handleCitySelect = async (city: string) => {
     setIsLoading(true);
     setError(undefined);
+    setSelectedCity(city);
     
     try {
       const response = await fetch('/api/generate', {
@@ -89,8 +91,8 @@ export default function Home() {
                     <CarouselItem key={index}>
                       <DateIdeaCard
                         idea={idea}
+                        city={selectedCity}
                         onLove={() => console.log('Loved:', idea.title)}
-                        onShare={() => console.log('Shared:', idea.title)}
                       />
                     </CarouselItem>
                   ))}
