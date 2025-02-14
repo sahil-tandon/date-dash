@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import clientPromise from '@/lib/db/mongodb';
-import { DateIdea } from '@/lib/db/types';
+import { DateIdea, AIResponse, AIDateIdea } from '@/lib/db/types';
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       throw new Error('Empty response from Gemini API');
     }
 
-    let parsedResponse;
+    let parsedResponse: AIResponse;
     try {
       parsedResponse = JSON.parse(response);
     } catch (parseError) {
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
       throw new Error('Invalid response structure from AI');
     }
 
-    const newIdeas = parsedResponse.ideas.map((idea: any) => ({
+    const newIdeas: DateIdea[] = parsedResponse.ideas.map((idea: AIDateIdea) => ({
       ...idea,
       city,
       likeCount: 0,

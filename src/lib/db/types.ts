@@ -24,3 +24,14 @@ export interface User {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface AIDateIdea {
+  title: string;
+  description: string;
+  estimatedCost: string;
+  icon: string;
+}
+
+export interface AIResponse {
+  ideas: AIDateIdea[];
+}
