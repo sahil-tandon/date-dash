@@ -5,7 +5,7 @@ import { DateIdea, AIResponse, AIDateIdea } from '@/lib/db/types';
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 
-const PROMPT = `Generate 10 unique and creative date ideas for {city}. Format as JSON array with properties: title (max 50 chars), description (max 150 chars), estimatedCost (e.g. "$30-50"), icon (single emoji). Return only valid JSON like: {"ideas":[{"title":"Sample Date","description":"Sample description","estimatedCost":"$30-50","icon":"🎸"}]}`;
+const PROMPT = `Generate 10 unique and creative date ideas for {city}. Format as JSON array with properties: title (max 50 chars), description (max 150 chars), estimatedCost (local and USD e.g. £30-50 ($38-63 USD)), icon (single emoji). Return only valid JSON like: {"ideas":[{"title":"Sample Date","description":"Sample description","estimatedCost":"£30-50 ($38-63 USD)","icon":"🎸"}]}`;
 
 export async function POST(req: Request) {
   try {
