@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from 'react';
 import { Heart, Share2 } from 'lucide-react';
 import { DateIdeaCardProps } from '@/types';
