@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { DateIdea, SavedIdeaEntry, SavedIdeasStore } from '@/types';
+import { DateIdea, SavedIdeasStore } from '@/types';
 
 const STORAGE_KEY = 'date-dash:saved';
 
