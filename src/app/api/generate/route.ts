@@ -53,9 +53,12 @@ export async function POST(req: Request) {
       throw new Error('Empty response from Gemini API');
     }
 
+    // Strip markdown code fences if present (e.g. ```json ... ```)
+    const cleanedResponse = response.replace(/^```(?:json)?\s*\n?/i, '').replace(/\n?```\s*$/i, '');
+
     let parsedResponse: AIResponse;
     try {
-      parsedResponse = JSON.parse(response);
+      parsedResponse = JSON.parse(cleanedResponse);
     } catch (parseError) {
       console.error('[generate] JSON Parse Error:', { error: parseError, response });
       throw new Error('Invalid JSON response from AI');
