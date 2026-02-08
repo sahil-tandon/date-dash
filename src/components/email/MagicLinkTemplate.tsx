@@ -8,7 +8,6 @@ interface EmailTemplateProps {
 
 export const MagicLinkTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   url,
-  host,
 }) => (
   <div>
     <table
@@ -79,7 +78,7 @@ export const MagicLinkTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
                     color: "#999999",
                   }}
                 >
-                  If you didn't request this email, you can safely ignore it.
+                  If you didn&apos;t request this email, you can safely ignore it.
                 </p>
               </td>
             </tr>

@@ -28,7 +28,7 @@ export default function SignIn() {
         // Show success message
         setError("Check your email for the login link!");
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
