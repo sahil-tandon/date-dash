@@ -6,6 +6,7 @@ import { CityCombobox } from '@/components/CityCombobox';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { DateIdea } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useSavedIdeas } from '@/hooks/useSavedIdeas';
 import {
   Carousel,
   CarouselContent,
@@ -19,6 +20,7 @@ export default function Home() {
   const [error, setError] = useState<string | undefined>();
   const [dateIdeas, setDateIdeas] = useState<DateIdea[]>([]);
   const [selectedCity, setSelectedCity] = useState<string>('');
+  const { isSaved, toggleSave } = useSavedIdeas();
 
   const handleCitySelect = async (city: string) => {
     setIsLoading(true);
@@ -93,7 +95,8 @@ export default function Home() {
                       <DateIdeaCard
                         idea={idea}
                         city={selectedCity}
-                        onLove={() => console.log('Loved:', idea.title)}
+                        onLove={() => toggleSave(selectedCity, idea)}
+                        isSaved={isSaved(selectedCity, idea.title)}
                       />
                     </CarouselItem>
                   ))}
