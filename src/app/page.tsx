@@ -6,7 +6,6 @@ import { CityCombobox } from '@/components/CityCombobox';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { DateIdea } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
-import { AuthTestButton } from '@/components/AuthTestButton';
 import {
   Carousel,
   CarouselContent,
@@ -71,11 +70,6 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Auth Test Button - TEMPORARY */}
-          <div className="mb-8">
-            <AuthTestButton />
-          </div>
-
           <div className="w-full max-w-md px-4">
             <CityCombobox 
               onSelect={handleCitySelect}
