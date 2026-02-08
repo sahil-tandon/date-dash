@@ -4,12 +4,13 @@ import { DateIdeaCardProps } from '@/types';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import ShareModal from '@/components/ShareModal';
+import { cn } from '@/lib/utils';
 
 interface ExtendedDateIdeaCardProps extends DateIdeaCardProps {
   city: string;
 }
 
-export function DateIdeaCard({ idea, onLove, city }: ExtendedDateIdeaCardProps) {
+export function DateIdeaCard({ idea, onLove, city, isSaved = false }: ExtendedDateIdeaCardProps) {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   return (
@@ -36,10 +37,16 @@ export function DateIdeaCard({ idea, onLove, city }: ExtendedDateIdeaCardProps) 
             variant="outline"
             size="icon"
             onClick={onLove}
-            className="h-8 w-8 rounded-full border-secondary/30 hover:text-primary hover:border-primary"
+            className={cn(
+              "h-8 w-8 rounded-full border-secondary/30 hover:text-primary hover:border-primary",
+              isSaved && "text-red-500 border-red-500/30 hover:text-red-600 hover:border-red-600"
+            )}
           >
-            <Heart className="h-4 w-4" />
-            <span className="sr-only">Love this idea</span>
+            <Heart className={cn(
+              "h-4 w-4 transition-colors",
+              isSaved && "fill-current text-red-500"
+            )} />
+            <span className="sr-only">{isSaved ? 'Remove from saved' : 'Save this idea'}</span>
           </Button>
           <Button
             variant="outline"
