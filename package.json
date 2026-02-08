@@ -22,7 +22,7 @@
     "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.474.0",
     "mongodb": "^6.13.0",
-    "next": "15.1.6",
+    "next": "15.1.9",
     "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
     "react-clouds": "^1.0.0",
@@ -37,7 +37,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint-config-next": "15.1.9",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
