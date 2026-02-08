@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Barrio, Oooh_Baby, Pompiere } from "next/font/google";
 import "./globals.css";
 import { CloudBackground } from "@/components/CloudBackground";
-import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,12 +47,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${barrio.variable} ${ooohBaby.variable} ${pompiere.variable} font-pompiere antialiased bg-rose-100`}
       >
-        <AuthProvider>
-          <CloudBackground />
-          <main className="relative min-h-screen">
-            {children}
-          </main>
-        </AuthProvider>
+        <CloudBackground />
+        <main className="relative min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );
