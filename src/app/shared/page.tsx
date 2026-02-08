@@ -8,12 +8,14 @@ import { ArrowLeft } from 'lucide-react';
 import { DateIdea } from '@/types';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { Button } from '@/components/ui/button';
+import { useSavedIdeas } from '@/hooks/useSavedIdeas';
 import { Skeleton } from '@/components/ui/skeleton';
 
 function SharedDateContent() {
   const searchParams = useSearchParams();
   const [sharedIdea, setSharedIdea] = useState<DateIdea | null>(null);
   const [city, setCity] = useState<string>('');
+  const { isSaved, toggleSave } = useSavedIdeas();
 
   useEffect(() => {
     const idea: DateIdea = {
@@ -55,10 +57,11 @@ function SharedDateContent() {
           </p>
         </div>
 
-        <DateIdeaCard 
+        <DateIdeaCard
           idea={sharedIdea}
           city={city}
-          onLove={() => {}}
+          onLove={() => toggleSave(city, sharedIdea)}
+          isSaved={isSaved(city, sharedIdea.title)}
         />
 
         <div className="text-center">
