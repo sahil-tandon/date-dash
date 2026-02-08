@@ -20,6 +20,17 @@ export interface DateIdeaCardProps {
   idea: DateIdea;
   onLove?: () => void;
   onShare?: () => void;
+  isSaved?: boolean;
+}
+
+export interface SavedIdeaEntry {
+  idea: DateIdea;
+  city: string;
+  savedAt: string;
+}
+
+export interface SavedIdeasStore {
+  [key: string]: SavedIdeaEntry;
 }
 
 export interface DateIdeasCarouselProps {
