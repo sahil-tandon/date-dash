@@ -4,6 +4,16 @@ All notable changes to DateDash will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.9.0] - 2026-02-08
+
+### Added
+
+- Save/bookmark date ideas with localStorage persistence
+- `useSavedIdeas` custom hook for managing saved state
+- Visual toggle on Heart button: filled red when saved, outline when not
+- Save functionality on shared date idea page
+- `SavedIdeaEntry` and `SavedIdeasStore` types (ready for future MongoDB sync)
+
 ## [0.8.0] - 2026-02-07
 
 ### Fixed
