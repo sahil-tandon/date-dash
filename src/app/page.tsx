@@ -1,10 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { CityCombobox } from '@/components/CityCombobox';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { DateIdea } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
+import { Heart } from 'lucide-react';
+import { useSavedIdeas } from '@/hooks/useSavedIdeas';
 import {
   Carousel,
   CarouselContent,
@@ -18,6 +22,7 @@ export default function Home() {
   const [error, setError] = useState<string | undefined>();
   const [dateIdeas, setDateIdeas] = useState<DateIdea[]>([]);
   const [selectedCity, setSelectedCity] = useState<string>('');
+  const { isSaved, toggleSave } = useSavedIdeas();
 
   const handleCitySelect = async (city: string) => {
     setIsLoading(true);
@@ -58,8 +63,18 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Navigation */}
+      <div className="absolute top-4 right-4 z-10">
+        <Link href="/favorites">
+          <Button variant="outline" className="font-pompiere gap-2">
+            <Heart className="h-4 w-4" />
+            My Favorites
+          </Button>
+        </Link>
+      </div>
+
       <div className={`flex-1 flex flex-col items-center justify-center ${topPaddingClass}`}>
-        <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">          
+        <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">
           <div className="text-center space-y-4 mb-12">
             <h1 className="text-5xl md:text-6xl font-normal tracking-wide text-primary font-barrio">
               DaTe DAsh
@@ -68,7 +83,7 @@ export default function Home() {
               Quick and easy date ideas on the go...
             </p>
           </div>
-          
+
           <div className="w-full max-w-md px-4">
             <CityCombobox 
               onSelect={handleCitySelect}
@@ -92,7 +107,8 @@ export default function Home() {
                       <DateIdeaCard
                         idea={idea}
                         city={selectedCity}
-                        onLove={() => console.log('Loved:', idea.title)}
+                        onLove={() => toggleSave(selectedCity, idea)}
+                        isSaved={isSaved(selectedCity, idea.title)}
                       />
                     </CarouselItem>
                   ))}
