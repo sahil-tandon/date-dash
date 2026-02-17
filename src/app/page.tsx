@@ -64,8 +64,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <Button
+        asChild
+        variant="ghost"
+        size="sm"
+        className="fixed top-5 right-5 z-10 font-pompiere text-primary/60 hover:text-primary hover:bg-primary/5"
+      >
+        <Link href="/favorites">
+          <Heart className="h-4 w-4" />
+          <span className="hidden sm:inline">My Favorites</span>
+        </Link>
+      </Button>
+
       <div className={`flex-1 flex flex-col items-center justify-center ${topPaddingClass}`}>
-        <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">          
+        <div className="w-full max-w-4xl px-4 pt-16 flex flex-col items-center">
           <div className="text-center space-y-4 mb-12">
             <h1 className="text-5xl md:text-6xl font-normal tracking-wide text-primary font-barrio">
               DaTe DAsh
@@ -73,12 +85,6 @@ export default function Home() {
             <p className="text-2xl md:text-3xl text-primary/90 font-oooh-baby">
               Quick and easy date ideas on the go...
             </p>
-            <Button asChild variant="ghost" size="sm" className="font-pompiere text-base text-primary/70 hover:text-primary">
-              <Link href="/favorites">
-                <Heart className="mr-1.5 h-4 w-4" />
-                My Favorites
-              </Link>
-            </Button>
           </div>
           
           <div className="w-full max-w-md px-4">
