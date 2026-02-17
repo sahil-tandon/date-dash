@@ -2,10 +2,13 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { Heart } from 'lucide-react';
 import { CityCombobox } from '@/components/CityCombobox';
 import { DateIdeaCard } from '@/components/DateIdeaCard';
 import { DateIdea } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { useSavedIdeas } from '@/hooks/useSavedIdeas';
 import {
   Carousel,
@@ -70,6 +73,12 @@ export default function Home() {
             <p className="text-2xl md:text-3xl text-primary/90 font-oooh-baby">
               Quick and easy date ideas on the go...
             </p>
+            <Button asChild variant="ghost" size="sm" className="font-pompiere text-base text-primary/70 hover:text-primary">
+              <Link href="/favorites">
+                <Heart className="mr-1.5 h-4 w-4" />
+                My Favorites
+              </Link>
+            </Button>
           </div>
           
           <div className="w-full max-w-md px-4">
