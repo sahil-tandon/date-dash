@@ -4,6 +4,16 @@ All notable changes to DateDash will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.10.0] - 2026-02-17
+
+### Added
+
+- Favorites page (`/favorites`) for viewing saved date ideas
+- Responsive 3-column grid layout (1 col mobile, 2 tablet, 3 desktop)
+- Empty state with friendly prompt when no favorites exist
+- Remove saved ideas by clicking the heart icon on the favorites page
+- "My Favorites" navigation link on the home page
+
 ## [0.9.0] - 2026-02-08
 
 ### Added
