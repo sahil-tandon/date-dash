@@ -4,6 +4,17 @@ All notable changes to DateDash will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [0.11.0] - 2026-02-17
+
+### Added
+
+- Rate limiting on `/api/generate` (10 req/hour per IP via MongoDB with TTL auto-expiry)
+
+### Fixed
+
+- Sanitize city input: max 100 chars, Unicode-aware pattern validation, regex escaping to prevent ReDoS
+- Truncate query param on `/api/cities/search` to 100 chars
+
 ## [0.10.0] - 2026-02-17
 
 ### Added
@@ -13,12 +24,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Empty state with friendly prompt when no favorites exist
 - Remove saved ideas by clicking the heart icon on the favorites page
 - "My Favorites" navigation link on the home page
-
-### Fixed
-
-- Add rate limiting to `/api/generate` (10 req/hour per IP via MongoDB)
-- Sanitize city input: max 100 chars, Unicode-aware pattern validation, regex escaping to prevent ReDoS
-- Truncate query param on `/api/cities/search` to 100 chars
 
 ## [0.9.0] - 2026-02-08
 
