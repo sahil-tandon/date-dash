@@ -14,6 +14,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Remove saved ideas by clicking the heart icon on the favorites page
 - "My Favorites" navigation link on the home page
 
+### Fixed
+
+- Add rate limiting to `/api/generate` (10 req/hour per IP via MongoDB)
+- Sanitize city input: max 100 chars, Unicode-aware pattern validation, regex escaping to prevent ReDoS
+- Truncate query param on `/api/cities/search` to 100 chars
+
 ## [0.9.0] - 2026-02-08
 
 ### Added
