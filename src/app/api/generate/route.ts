@@ -2,15 +2,37 @@ import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import clientPromise from '@/lib/db/mongodb';
 import { DateIdea, AIResponse, AIDateIdea } from '@/lib/db/types';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 
 export const maxDuration = 30;
 
+const CITY_MAX_LENGTH = 100;
+const CITY_PATTERN = /^[\p{L}\p{M}\s\-'.,()\u0600-\u06FF]+$/u;
+
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const PROMPT = `Generate 10 unique and creative date ideas for {city}. Format as JSON array with properties: title (max 50 chars), description (max 150 chars), estimatedCost (local and USD e.g. £30-50 ($38-63 USD)), icon (single emoji). Return only valid JSON like: {"ideas":[{"title":"Sample Date","description":"Sample description","estimatedCost":"£30-50 ($38-63 USD)","icon":"🎸"}]}`;
 
 export async function POST(req: Request) {
   try {
+    // --- Rate limiting ---
+    const forwarded = req.headers.get('x-forwarded-for');
+    const ip = forwarded?.split(',')[0]?.trim() || 'unknown';
+    const limit = await checkRateLimit(ip);
+
+    if (!limit.allowed) {
+      const retryAfter = Math.ceil(limit.retryAfterMs / 1000);
+      return NextResponse.json(
+        { success: false, error: 'Too many requests. Please try again later.' },
+        { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+      );
+    }
+
+    // --- Input validation ---
     const { city } = await req.json();
     console.log('[generate] Request for city:', city);
 
@@ -21,18 +43,34 @@ export async function POST(req: Request) {
       );
     }
 
+    const trimmedCity = city.trim();
+
+    if (trimmedCity.length === 0 || trimmedCity.length > CITY_MAX_LENGTH) {
+      return NextResponse.json(
+        { success: false, error: 'City name must be between 1 and 100 characters' },
+        { status: 400 }
+      );
+    }
+
+    if (!CITY_PATTERN.test(trimmedCity)) {
+      return NextResponse.json(
+        { success: false, error: 'City name contains invalid characters' },
+        { status: 400 }
+      );
+    }
+
     console.log('[generate] Connecting to MongoDB...');
-    console.log('[generate] MONGODB_URI set:', !!process.env.MONGODB_URI);
-    console.log('[generate] MONGODB_DB set:', !!process.env.MONGODB_DB);
     const client = await clientPromise;
     console.log('[generate] MongoDB connected');
 
     const db = client.db(process.env.MONGODB_DB);
     const dateIdeas = db.collection<DateIdea>('dateIdeas');
 
+    // Escape special regex chars to prevent ReDoS
+    const escapedCity = escapeRegExp(trimmedCity);
     console.log('[generate] Querying for existing ideas...');
     const existingIdeas = await dateIdeas
-      .find({ city: { $regex: new RegExp('^' + city + '$', 'i') } })
+      .find({ city: { $regex: new RegExp('^' + escapedCity + '$', 'i') } })
       .toArray();
     console.log('[generate] Found', existingIdeas.length, 'existing ideas');
 
@@ -41,10 +79,9 @@ export async function POST(req: Request) {
     }
 
     console.log('[generate] No cached ideas, calling Gemini API...');
-    console.log('[generate] GOOGLE_API_KEY set:', !!process.env.GOOGLE_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
-    const result = await model.generateContent(PROMPT.replace('{city}', city));
+    const result = await model.generateContent(PROMPT.replace('{city}', trimmedCity));
     console.log('[generate] Gemini API responded');
     const response = result.response.text();
     console.log('[generate] Response text length:', response?.length);
@@ -72,7 +109,7 @@ export async function POST(req: Request) {
     console.log('[generate] Parsed', parsedResponse.ideas.length, 'ideas, saving to MongoDB...');
     const newIdeas: DateIdea[] = parsedResponse.ideas.map((idea: AIDateIdea) => ({
       ...idea,
-      city,
+      city: trimmedCity,
       likeCount: 0,
       createdAt: new Date()
     }));
